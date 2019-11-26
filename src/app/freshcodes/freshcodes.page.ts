@@ -23,10 +23,6 @@ export class FreshcodesPage implements OnInit {
   constructor(private afs: AngularFirestore, private authService : AuthService) {
    }
   
-   ionViewCanEnter(){
-     return this.authService.isAuthenticated();
-   }
-  
   loadCodeCount(){
     this.afs.collection('codecount').doc('set1').get().subscribe(res =>{
       this.usedcount = res.get('used');
@@ -52,7 +48,7 @@ export class FreshcodesPage implements OnInit {
   }
 
   loadCodes(){
-    this.afs.collection(`codeauth`, q => q.orderBy('status','desc').limit(1))
+    this.afs.collection(`codeauth`, q => q.orderBy('status','desc').limit(5))
     .snapshotChanges().subscribe(response => {
       if (!response.length){
         console.log('no data available');
@@ -83,7 +79,7 @@ export class FreshcodesPage implements OnInit {
     this.loadCodeCount();
     this.disable_next = true;
     this.afs.collection(`codeauth`, ref => ref
-    .limit(1)
+    .limit(5)
     .orderBy('status','desc')
     .startAfter(this.lastInResponse)
     ).get()
@@ -102,6 +98,7 @@ export class FreshcodesPage implements OnInit {
         let codeauth:any = a.data();
         codeauth.id = a.id;
         this.codeauths.push(codeauth);
+        console.log('next code success');
       });
 
       this.pagination_clicked_count++;
@@ -121,7 +118,7 @@ export class FreshcodesPage implements OnInit {
     .orderBy('status','desc')
     .startAt(this.get_prev_startAt())
     .endBefore(this.firstInResponse)
-    .limit(1))
+    .limit(5))
     .get().subscribe(response => {
 
       this.firstInResponse = response.docs[0];
@@ -132,6 +129,7 @@ export class FreshcodesPage implements OnInit {
         let codeauth:any = a.data();
         codeauth.id = a.id;
         this.codeauths.push(codeauth);
+        console.log('prev code success');
       });
 
       this.pagination_clicked_count--;

@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "",
+    apiKey: "AIzaSyDBPxjO_SyNrkpKG8D8hEavkwGufylnCl0",
     authDomain: "intergames-votingsys.firebaseapp.com",
     databaseURL: "https://intergames-votingsys.firebaseio.com",
     projectId: "intergames-votingsys",
