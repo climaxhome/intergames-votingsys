@@ -68,6 +68,23 @@ export class AlertService{
     let result = await alert.onDidDismiss();
     console.log(result)
   }
+  async alertMessage(msg:string){
+    const alert = await this.alertController.create({
+      message: msg,
+      buttons: [
+        {
+          text: 'Close',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    await alert.present();
+    let result = await alert.onDidDismiss();
+    console.log(result)
+  }
   async pwInvalidAlert(){
     this.loadingController.dismiss();
     const alert = await this.alertController.create({

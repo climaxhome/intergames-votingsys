@@ -11,7 +11,11 @@ const routes: Routes = [
     loadChildren: () => import('./freshcodes/freshcodes.module').then( m => m.FreshcodesPageModule),
     canActivate: [AuthGuard]
   },
-  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminPageModule)}
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminPageModule)},  {
+    path: 'scanner',
+    loadChildren: () => import('./scanner/scanner.module').then( m => m.ScannerPageModule)
+  }
+
 ];
 
 @NgModule({

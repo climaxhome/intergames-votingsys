@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { VoteService } from '../../providers/vote.service';
 import { AlertService } from '../../providers/alert.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class HomePage {
     public alertController: AlertController,
     public loadingController: LoadingController,
     public voteService: VoteService,
-    public alsv: AlertService){
+    public alsv: AlertService,
+    private router: Router
+    ){
   }
   async voteAlert(name:string){
     const alert = await this.alertController.create({
@@ -57,5 +60,8 @@ export class HomePage {
   }
   vote(name:string,code:string){
     this.voteService.vote(name,code);
+  }
+  goToScanner(){
+    this.router.navigate(['scanner']);
   }
 }
